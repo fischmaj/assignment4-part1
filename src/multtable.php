@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors',0);
 header('Content-type: text/html');
 
 echo '<!DOCTYPE html>
@@ -28,7 +28,7 @@ function check_inputs (&$good, $values) {
   }
 
   for ($i = 0; $i < 4; $i++){
-    if (!settype($values[$i], "integer") ) {
+    if (!(is_numeric($values[$i]) && ($values[$i]== (int)$values[$i]))) {
       $good = false;
       echo "<p> $error_msg[$i] is not a valid integer</p>";   
     }

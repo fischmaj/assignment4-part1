@@ -13,34 +13,51 @@ echo '<!DOCTYPE html>
 
 
 $request= $_SERVER['REQUEST_METHOD'];
-
 if ($request === 'POST'){
-  $myObj = '{"Type": "POST",';
-  // detect if the post contained any parameters
-  if (count($_POST >= 1){
+  $myObj = "{\"Type\": \"POST\", \"parameters\":";
+  // detect if the POST contained any parameters
+  if (count($_POST) >= 1){
+    $myObj .="{";
+    $myCount = 0; 
     foreach ($_POST as $key => $value) {
-      $myObj += $key.":".$value;
+      if ($myCount > 0){
+        $myObj .= ",";   //add a comma before every parameter except first one
+      }
+      $myObj .="\"".$key."\":".$value;
+      $myCount++; 
     }
-    $myObj += "}";
+    $myObj .= "}}";
 
   } else {
-    $myObj += '"Parameters: NULL}";
+    $myObj .= "NULL}";
   }
+  
 
-} else if ($request === 'GET'){
-  $myObj = '{"Type": "GET",';
+} elseif($request ==="GET"){
+  $myObj = "{\"Type\": \"GET\", \"parameters\":";
   // detect if the get contained any parameters
-  if (count($_GET >= 1){
+  if (count($_GET) >= 1){
+    $myObj .="{";
+    $myCount = 0; 
     foreach ($_GET as $key => $value) {
-      $myObj += $key.":".$value;
+      if ($myCount > 0){
+        $myObj .= ",";   //add a comma before every parameter except first one
+      }
+      $myObj .="\"".$key."\":".$value;
+      $myCount++; 
     }
-    $myObj += "}";
+    $myObj .= "}}";
 
   } else {
-    $myObj += '"Parameters: NULL}";
+    $myObj .= "NULL}";
   }
+  
+} else {
+  $myObj .= "{\"Type\":NULL, \"Parameters\": NULL}";
 }
 
-echo $myObj;
+
+//Now that the object is built, echo it to screen.
+echo "<p>".$myObj."</p>";
 
 ?>

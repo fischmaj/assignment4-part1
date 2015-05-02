@@ -21,25 +21,36 @@ function check_inputs (&$good, $values) {
   );
 
   for ($i = 0; $i < 4; $i++){
+
+    // test if the value is empty
     if ($values[$i] == NULL) {
       $good = false;
-      echo "<p> $error_msg[$i] is missing a value</p>";   
-    }
-  }
+      echo "<p> $error_msg[$i] is missing a value</p>";
 
-  for ($i = 0; $i < 4; $i++){
-    if (!(is_numeric($values[$i]) && ($values[$i]== (int)$values[$i]))) {
+    // if non-empty, check for non-integer input   
+    } elseif( !(is_numeric($values[$i])) 
+        || ((is_numeric($values[$i]) && !($values[$i]== (int)$values[$i])))) {
       $good = false;
-      echo "<p> $error_msg[$i] is not a valid integer</p>";   
+      echo "<p> $error_msg[$i] is not a valid integer</p>";
+
+    // if integer input, check for negatives
+    } elseif ((is_numeric($values[$i]) && ($values[$i]< 0))) {
+      $good = false;
+      echo "<p> $error_msg[$i] cannot be negative.</p>";   
     }
   }
   
-  if ($values[0] > $values[1]){
+  //seperately, check the mins against the max's
+  if (is_numeric($values[0])
+      && is_numeric($values[1])
+      && ($values[0] > $values[1])){
     echo "<p> min-multiplicand cannot be larger than max-multiplicand.";
     $good = false;
   }
 
-  if ($values[2] > $values[3]){
+  if (is_numeric($values[2])
+      && is_numeric($values[3])
+      && ($values[2] > $values[3])){
     echo "<p> min-multiplier cannot be larger than max-multiplier.";
     $good = false;
   }
@@ -68,16 +79,18 @@ function create_table($values){
 }
 
 
+//Execution begins here-- read the inputs from $_GET
 $mind = $_GET["min-multiplicand"];
 $maxd = $_GET['max-multiplicand'];
 $minr = $_GET['min-multiplier'];
 $maxr = $_GET['max-multiplier'];
 
+//Assume inputs are good initially, but check them
 $good_inputs = true;
 $inputs = array( $mind, $maxd, $minr, $maxr);
-
-
 check_inputs($good_inputs, $inputs);
+
+//Only if good, create table. 
 if ($good_inputs){
   create_table($inputs);
 }

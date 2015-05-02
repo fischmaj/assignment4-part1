@@ -10,14 +10,15 @@
 
 function createForm ($reset){
   echo "<form action = \"http://localhost/~fschmps314/";
-  echo "assignment4-part1/content1.php\" method = \"POST\"> ";
+  echo "PHP-Lecture-Code/assignment4-part1/src/content1.php\"";
+  echo " method = \"POST\"> ";
   echo "<H3>USER NAME:</H3>";
   echo "<input type= \"text\" name = \"login\" >";
 
   if (!$reset) { //user was not logged out, so submitting should 
                  //command content1.php to destroy old session.
     echo "<input type =\"hidden\" name =\"logout\" value =\"true\">";
- 
+  }
   echo "<br><input type =\"submit\" value =\"SUBMIT\">";
   echo "</form>";
 }
@@ -28,7 +29,10 @@ $logout = $_POST["logout"];  //See if logout commanded from previous page.
 
 //if a user is logged in and sending page didn't post a 'logout' command
 //then provide the user a warning and a way to return to content
-if ( isset($_SESSION["userID"]) && !$logout ){
+
+echo "Session is set: ".(session_status()).".";
+
+if ( ( session_status()== PHP_SESSION_ACTIVE ) && !$logout ){
                            
   $user = $_SESSION["userID"];
   echo "<br><H4> You are already logged in, $user. If you ";
@@ -39,7 +43,7 @@ if ( isset($_SESSION["userID"]) && !$logout ){
   echo " <br>Otherwise entering a new";
   echo " login ID below will log out user=$user.";
 
-} else {  //either userID is not set or logout is true, so destroy session
+} elseif ($logout && (session_status()== PHP_SESSION_ACTIVE) ) {  
 
   session_unset();
   session_destroy();

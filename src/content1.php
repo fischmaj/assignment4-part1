@@ -18,12 +18,12 @@ if (isset($_SESSION["username"])) { //if a user has logged in
   echo "Hello ".$_SESSION["username"].".  You have visited this page: <br>";
   echo $_SESSION["count"] ." times before.<br><br>";
   $_SESSION["count"]++;
-  echo "Follow this <a href=\"http://localhost/~fschmps314/PHP-Lecture-Code";
+  echo "Follow this <a href=\"http://web.engr.oregonstate.edu/~fischmaj/cs290";
   echo "/assignment4-part1/src/content2.php\"> link </a> to the ";
   echo "content 2 page!<br>";
 
 
-} else { //
+} else { 
   $user = $_POST["username"];
   if ( ($user !="") && ($user != NULL) ) {
     $_SESSION["username"]= $user;
@@ -32,14 +32,14 @@ if (isset($_SESSION["username"])) { //if a user has logged in
     echo " You have visited this page: <br>";
     echo $_SESSION["count"] ." times before.<br><br>"; 
     $_SESSION["count"]++;
-    echo "Follow this <a href=\"http://localhost/~fschmps314/PHP-Lecture-Code";
-    echo "/assignment4-part1/src/content2.php\"> link </a> to the ";
+    echo "Follow this <a href=\"http://web.engr.oregonstate.edu/~fischmaj/";
+    echo "/cs290/assignment4-part1/src/content2.php\"> link </a> to the ";
     echo "content 2 page!<br>";
    
   } else {
       echo "A user name must be entered. Click ";
-      echo "<a href=\"http://localhost/~fschmps314";
-      echo "/PHP-Lecture-Code/assignment4-part1/src/login.php\">";
+      echo "<a href=\"http://web.engr.oregonstate.edu/~fischmaj/cs290/";
+      echo "assignment4-part1/src/login.php\">";
       echo "here</a> to return to the login screen."; 
   }
 
@@ -49,7 +49,8 @@ if (isset($_SESSION["username"])) { //if a user has logged in
 ?>
 
 
-<form action ="http://localhost/~fschmps314/PHP-Lecture-Code/assignment4-part1/src/login.php" method = "GET">
+<form action =
+"http://web.engr.oregonstate.edu/~fischmaj/cs290/assignment4-part1/src/login.php" method = "GET">
 <button type = "submit" name = "action" value = "logout">LOGOUT</button> 
 </form>
 

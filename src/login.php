@@ -18,8 +18,8 @@ if ($_GET["action"] == "logout") {
 <body>
 <?php
 function createForm (){
-  echo "<form action = \"http://localhost/~fschmps314/";
-  echo "PHP-Lecture-Code/assignment4-part1/src/content1.php\"";
+  echo "<form action = \"http://web.engr.oregonstate.edu/~fischmaj/cs290/";
+  echo "assignment4-part1/src/content1.php\"";
   echo " method = \"POST\"> ";
   echo "<H3>USER NAME:</H3>";
   echo "<input type= \"text\" name = \"username\" >";
@@ -28,7 +28,7 @@ function createForm (){
 }
 
 createForm();
-die();
+
 ?>
 
 </body>
